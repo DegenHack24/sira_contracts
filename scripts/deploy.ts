@@ -20,7 +20,12 @@ async function main() {
       initializer: "initialize"});
     const equityToken = await upgrades.deployProxy(
       EquityToken,
-      ["Huta Julia", "HJ", "URI",allowedList.address],
+      ["BlockyDevs", "BD", "URI",allowedList.address],
+      { initializer: "initialize"}
+    );
+    const equityToken2 = await upgrades.deployProxy(
+      EquityToken,
+      ["DegenHouse", "DH", "URI",allowedList.address],
       { initializer: "initialize"}
     );
     const tok = await upgrades.deployProxy(TOK, [stableCoin.address], {
@@ -30,6 +35,7 @@ async function main() {
     console.log("StableCoin deployed to:", stableCoin.address);
     console.log("AllowedList deployed to:", allowedList.address);
     console.log("EquityToken deployed to:", equityToken.address);
+    console.log("EquityToken2 deployed to:", equityToken2.address);
     console.log("TOK deployed to:", tok.address);  
     return { allowedList, stableCoin, equityToken, owner, tok, otherAccount };
 }
