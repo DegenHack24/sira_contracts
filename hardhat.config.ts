@@ -12,7 +12,7 @@ const config: HardhatUserConfig = {
   networks: {
     sepolia: {
       url: `https://sepolia.infura.io/v3/${INFURA_API_KEY}`,
-      accounts: [SEPOLIA_PRIVATE_KEY, process.env.WALLET_1, process.env.WALLET_2]
+      accounts: [SEPOLIA_PRIVATE_KEY, process.env.WALLET_1, process.env.WALLET_2, process.env.WALLET_3]
     }
   }
 };
