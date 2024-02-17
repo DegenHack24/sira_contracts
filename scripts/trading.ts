@@ -8,6 +8,7 @@ async function main() {
     const wallet3 = accounts[3];
     const allowListAddress = process.env.ALLOW_LIST_ADDRESS;
     const equityTokenAddress = process.env.EQUITY_TOKEN_ADDRESS;
+    const equityTokenAddress2 = process.env.EQUITY_TOKEN_ADDRESS_2;
     const stableCoinAddress = process.env.STABLE_COIN_ADDRESS;
     const tokAddress = process.env.TOK_ADDRESS;
 
@@ -20,6 +21,7 @@ async function main() {
     console.log("TOK address: ", tokAddress);
 
     const equityToken = await ethers.getContractAt("EquityToken", equityTokenAddress, adminWallet);
+    const equityToken2 = await ethers.getContractAt("EquityToken", equityTokenAddress2, adminWallet);
     const tok = await ethers.getContractAt("TOK", tokAddress, adminWallet);
 
     //create 5 random orders
@@ -33,10 +35,12 @@ async function main() {
         const buyer = [wallet1, wallet2, wallet3][Math.floor(Math.random() * 3)];
         //random wallet from wallet1, wallet2, wallet3 excluding buyer
         const seller = [wallet1, wallet2, wallet3].filter(wallet => wallet !== buyer)[Math.floor(Math.random() * 2)];
+        const randomEquityToken = Math.random() < 0.5 ? equityToken : equityToken2;
         console.log("Buyer: ", buyer.address);
         console.log("Seller: ", seller.address);
+        console.log("Random equity token: ", randomEquityToken.address);
 
-        const txResult = (await tok.connect(buyer).createOrder(stableCoinPrice, equityToken.address, equityTokenAmount)).wait();
+        const txResult = (await tok.connect(buyer).createOrder(stableCoinPrice, randomEquityToken.address, equityTokenAmount)).wait();
         let orderId;
         (await txResult).events?.forEach((event: any) => {
             if (event.event === "NewOrderEvent") {
