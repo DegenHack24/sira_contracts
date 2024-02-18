@@ -9,15 +9,14 @@ async function main() {
     console.log("TOK address: ", tokAddress);
 
     const tok = await ethers.getContractAt("TOK", tokAddress, adminWallet);
-
-    const orderId = 0;
+    const orderId = 2;
     console.log("Locking transaction...");
-    const lockTransactionTx = await tok.lockTransaction(orderId, false);
+    const lockTransactionTx = await tok.lockTransaction(orderId, false, {gasLimit: 300000});
     await lockTransactionTx.wait();
     console.log("Locking transaction done");
 
     console.log("Calling transact on TOK...");
-    (await tok.transact(orderId)).wait();
+    (await tok.transact(orderId, {gasLimit: 300000})).wait();
     console.log("Transact done");
 }
 

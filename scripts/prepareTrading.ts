@@ -58,9 +58,9 @@ async function main() {
     const stableCoinApproveTx1 = await stableCoin.connect(wallet1).approve(tok.address, 1000);
     const stableCoinApproveTx2 = await stableCoin.connect(wallet2).approve(tok.address, 1000);
     const stableCoinApproveTx3 = await stableCoin.connect(wallet3).approve(tok.address, 1000);
-    const equityTokenApproveTx1 = await equityToken.connect(wallet1).approve(tok.address, 100);
-    const equityTokenApproveTx2 = await equityToken.connect(wallet2).approve(tok.address, 100);
-    const equityTokenApproveTx3 = await equityToken.connect(wallet3).approve(tok.address, 100);
+    const equityTokenApproveTx1 = await equityToken.connect(wallet1).approve(tok.address, 1000);
+    const equityTokenApproveTx2 = await equityToken.connect(wallet2).approve(tok.address, 1000);
+    const equityTokenApproveTx3 = await equityToken.connect(wallet3).approve(tok.address, 1000);
 
     await stableCoinApproveTx1.wait();
     await stableCoinApproveTx2.wait();
